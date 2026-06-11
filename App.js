@@ -241,7 +241,8 @@ function HomeScreen({ navigation }) {
         />
 
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Новости компании</Text>
+          {/* ИСПРАВЛЕНО: "Новости компании" изменены на просто "Новости" */}
+          <Text style={styles.sectionTitle}>Новости</Text>
           <TouchableOpacity onPress={() => navigation.navigate('NewsList')}>
             <Text style={styles.seeAllText}>Все</Text>
           </TouchableOpacity>
@@ -568,7 +569,7 @@ const styles = StyleSheet.create({
 
   // Reports
   reportCard: { marginBottom: 30 },
-  reportImage: { width: '100%', height: 220, backgroundColor: '#F8F8F9', borderRadius: 20, justifyContent: 'center', alignItems: 'center' },
+  reportImage: { width: '100%', height: 220, backgroundColor: '#F8F8F9', borderRadius: 16, justifyContent: 'center', alignItems: 'center' },
   playOverlayRounded: { width: 60, height: 60, borderRadius: 30, backgroundColor: 'rgba(0,0,0,0.4)', justifyContent: 'center', alignItems: 'center' },
   reportInfo: { paddingTop: 15 },
   reportTitle: { fontSize: 18, color: '#1A1A1A', fontWeight: '700', lineHeight: 24, marginBottom: 6 },
@@ -607,7 +608,6 @@ const styles = StyleSheet.create({
   
   // Details
   detailImage: { width: '100%', height: 250, borderRadius: 16, backgroundColor: '#F8F8F9', marginBottom: 20 },
-  detailContent: { paddingTop: 10, paddingBottom: 40 },
   detailDate: { fontSize: 14, color: '#999999', fontWeight: '500', marginBottom: 10 },
   detailTitle: { fontSize: 24, fontWeight: '700', color: '#1A1A1A', marginBottom: 15, lineHeight: 32 },
   detailBody: { fontSize: 16, color: '#444444', lineHeight: 26 },

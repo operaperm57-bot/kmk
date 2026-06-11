@@ -10,6 +10,22 @@ import { Ionicons } from '@expo/vector-icons';
 import Svg, { Path } from 'react-native-svg';
 
 // ==============================
+// 100% БУЛЛЕТПРУФ ХАК ДЛЯ ВЕБ-ИКОНОК
+// ==============================
+if (Platform.OS === 'web' && typeof document !== 'undefined') {
+  const iconFontStyles = `
+    @font-face {
+      font-family: 'Ionicons';
+      src: url('https://unpkg.com/react-native-vector-icons/Fonts/Ionicons.ttf') format('truetype');
+    }
+  `;
+  const style = document.createElement('style');
+  style.type = 'text/css';
+  style.appendChild(document.createTextNode(iconFontStyles));
+  document.head.appendChild(style);
+}
+
+// ==============================
 // ВЕКТОРНЫЙ ЛОГОТИП КМК
 // ==============================
 const LogoKMK = ({ width = 210, height = 60, color = "#000000" }) => (
@@ -241,7 +257,6 @@ function HomeScreen({ navigation }) {
         />
 
         <View style={styles.sectionHeader}>
-          {/* ИСПРАВЛЕНО: "Новости компании" изменены на просто "Новости" */}
           <Text style={styles.sectionTitle}>Новости</Text>
           <TouchableOpacity onPress={() => navigation.navigate('NewsList')}>
             <Text style={styles.seeAllText}>Все</Text>
@@ -397,6 +412,7 @@ function EventsListScreen({ navigation }) {
   );
 }
 
+// ЭКРАН ИНФО О СОБЫТИИ
 function EventDetailsScreen({ route }) {
   const { event } = route.params;
   return (
@@ -544,7 +560,7 @@ const styles = StyleSheet.create({
   greeting: { fontSize: 18, fontWeight: '700', color: '#1A1A1A' },
   subtitleGray: { fontSize: 14, color: '#737373', marginTop: 2 },
   
-  // Events Slider (FlatList)
+  // Events Slider
   sliderPadding: { paddingLeft: 20, paddingRight: 5, paddingBottom: 10 },
   eventCardWrapper: { width: 280, marginRight: 15 },
   cardRadius: { borderRadius: 16 },

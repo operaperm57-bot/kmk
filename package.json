@@ -1,25 +1,34 @@
-{
-  "name": "kmk-app",
-  "version": "1.0.0",
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
-  },
-  "dependencies": {
-    "@expo/metro-runtime": "~4.0.0",
-    "@react-navigation/bottom-tabs": "^6.5.0",
-    "@react-navigation/native": "^6.1.0",
-    "@react-navigation/stack": "^6.3.0",
-    "expo": "~51.0.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-native": "0.74.5",
-    "react-native-safe-area-context": "4.10.5",
-    "react-native-screens": "3.31.1",
-    "react-native-svg": "15.2.0",
-    "react-native-web": "~0.19.10"
-  },
-  "private": true
+export default function App() {
+  // Принудительно загружаем шрифты иконок для веб-версии
+  const [fontsLoaded] = useFonts({
+    ...Ionicons.font,
+  });
+
+  // Пока иконки не скачались, показываем пустой экран (это занимает доли секунды)
+  if (!fontsLoaded) {
+    return null; 
+  }
+
+  return (
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ 
+          headerStyle: { backgroundColor: '#FFFFFF', elevation: 0, shadowOpacity: 0, borderBottomWidth: 0 },
+          headerTitleStyle: { fontWeight: '700', fontSize: 17, color: '#1A1A1A' },
+          headerTintColor: '#1A1A1A',
+          cardStyle: { backgroundColor: '#FFFFFF' },
+          headerBackTitleVisible: false
+        }}>
+          <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="MainApp" component={MainTabs} options={{ headerShown: false }} />
+          <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Профиль' }} />
+          <Stack.Screen name="EventsList" component={EventsListScreen} options={{ title: 'Все события' }} />
+          <Stack.Screen name="EventDetails" component={EventDetailsScreen} options={{ title: 'Событие' }} />
+          <Stack.Screen name="NewsList" component={NewsListScreen} options={{ title: 'Все новости' }} />
+          <Stack.Screen name="NewsDetails" component={NewsDetailsScreen} options={{ title: 'Новость' }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
+  );
 }
